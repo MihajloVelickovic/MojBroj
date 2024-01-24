@@ -1,3 +1,0 @@
-/home/migel/Documents/Code/moj_broj/build/CMakeFiles/main.dir
-/home/migel/Documents/Code/moj_broj/build/CMakeFiles/edit_cache.dir
-/home/migel/Documents/Code/moj_broj/build/CMakeFiles/rebuild_cache.dir
