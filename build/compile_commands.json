@@ -1,26 +1,26 @@
 [
 {
-  "directory": "/media/ssd1/Code/etc/C/moj_broj/build",
-  "command": "/usr/bin/gcc -I/media/ssd1/Code/etc/C/moj_broj/include -g -o CMakeFiles/main.dir/src/func.c.o -c /media/ssd1/Code/etc/C/moj_broj/src/func.c",
-  "file": "/media/ssd1/Code/etc/C/moj_broj/src/func.c",
+  "directory": "/home/migel/Documents/Code/moj_broj/build",
+  "command": "/usr/bin/gcc -I/home/migel/Documents/Code/moj_broj/include -g -o CMakeFiles/main.dir/src/func.c.o -c /home/migel/Documents/Code/moj_broj/src/func.c",
+  "file": "/home/migel/Documents/Code/moj_broj/src/func.c",
   "output": "CMakeFiles/main.dir/src/func.c.o"
 },
 {
-  "directory": "/media/ssd1/Code/etc/C/moj_broj/build",
-  "command": "/usr/bin/gcc -I/media/ssd1/Code/etc/C/moj_broj/include -g -o CMakeFiles/main.dir/src/main.c.o -c /media/ssd1/Code/etc/C/moj_broj/src/main.c",
-  "file": "/media/ssd1/Code/etc/C/moj_broj/src/main.c",
+  "directory": "/home/migel/Documents/Code/moj_broj/build",
+  "command": "/usr/bin/gcc -I/home/migel/Documents/Code/moj_broj/include -g -o CMakeFiles/main.dir/src/main.c.o -c /home/migel/Documents/Code/moj_broj/src/main.c",
+  "file": "/home/migel/Documents/Code/moj_broj/src/main.c",
   "output": "CMakeFiles/main.dir/src/main.c.o"
 },
 {
-  "directory": "/media/ssd1/Code/etc/C/moj_broj/build",
-  "command": "/usr/bin/gcc -I/media/ssd1/Code/etc/C/moj_broj/include -g -o CMakeFiles/main.dir/src/node.c.o -c /media/ssd1/Code/etc/C/moj_broj/src/node.c",
-  "file": "/media/ssd1/Code/etc/C/moj_broj/src/node.c",
+  "directory": "/home/migel/Documents/Code/moj_broj/build",
+  "command": "/usr/bin/gcc -I/home/migel/Documents/Code/moj_broj/include -g -o CMakeFiles/main.dir/src/node.c.o -c /home/migel/Documents/Code/moj_broj/src/node.c",
+  "file": "/home/migel/Documents/Code/moj_broj/src/node.c",
   "output": "CMakeFiles/main.dir/src/node.c.o"
 },
 {
-  "directory": "/media/ssd1/Code/etc/C/moj_broj/build",
-  "command": "/usr/bin/gcc -I/media/ssd1/Code/etc/C/moj_broj/include -g -o CMakeFiles/main.dir/src/stack.c.o -c /media/ssd1/Code/etc/C/moj_broj/src/stack.c",
-  "file": "/media/ssd1/Code/etc/C/moj_broj/src/stack.c",
+  "directory": "/home/migel/Documents/Code/moj_broj/build",
+  "command": "/usr/bin/gcc -I/home/migel/Documents/Code/moj_broj/include -g -o CMakeFiles/main.dir/src/stack.c.o -c /home/migel/Documents/Code/moj_broj/src/stack.c",
+  "file": "/home/migel/Documents/Code/moj_broj/src/stack.c",
   "output": "CMakeFiles/main.dir/src/stack.c.o"
 }
 ]
