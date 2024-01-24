@@ -1,0 +1,6 @@
+# ninja log v5
+1	16	1706127169251794900	CMakeFiles/main.dir/src/node.c.o	d78ca07b17245277
+1	40	1706134617789690081	CMakeFiles/main.dir/src/main.c.o	99d702b7825a6854
+0	36	1706136132066285451	CMakeFiles/main.dir/src/func.c.o	ad9925cb95dcdc9e
+1	34	1706133959061513137	CMakeFiles/main.dir/src/stack.c.o	113f4f7f1a7fc4e5
+36	59	1706136132089618371	main	22b070158f98a74e

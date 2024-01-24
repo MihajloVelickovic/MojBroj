@@ -1,0 +1,3 @@
+/media/ssd1/Code/etc/C/moj_broj/build/CMakeFiles/main.dir
+/media/ssd1/Code/etc/C/moj_broj/build/CMakeFiles/edit_cache.dir
+/media/ssd1/Code/etc/C/moj_broj/build/CMakeFiles/rebuild_cache.dir
