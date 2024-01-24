@@ -1,4 +1,4 @@
-# Install script for directory: /media/ssd1/Code/etc/C/moj_broj
+# Install script for directory: /home/migel/Documents/Code/moj_broj
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/media/ssd1/Code/etc/C/moj_broj/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/migel/Documents/Code/moj_broj/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
