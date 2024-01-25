@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#ifdef __WIN32
+#ifdef _WIN32
     #include <windows.h>
     #define CLEAR "cls"
 #else
@@ -33,7 +33,13 @@ int main(){
         numbers[QUARTER] = generate_quarter();    
         numbers[FINAL] = generate_final();
 
-        for(i=0; i<SIZE; ++i){
+        for(i=0; i<SIZE-3; ++i){
+            getchar();
+            printf("%d", numbers[i]);
+        }
+
+        for(i=SIZE-3; i<SIZE; ++i){
+            printf("\n");
             getchar();
             printf("%d", numbers[i]);
         }
