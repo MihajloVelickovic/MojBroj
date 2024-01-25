@@ -18,8 +18,7 @@ void push(struct Stack* stack, int element){
 int pop(struct Stack* stack){
    
     struct Node* top_node = stack->m_Top;
-    if(!top_node)   
-        return 0;
+
     int top_value = top_node->m_Value;
 
     stack->m_Top = top_node->m_Next;
@@ -55,18 +54,20 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, int* e
     
     int used_counter = SIZE-1;
 
+    int multiplier, number;
+
     bool operator = false;
 
     for(i = 0; expression[i] != '\0'; ++i){
 
-        int multiplier = 1;
+        multiplier = 1;
         if(expression[i] >= 48 && expression[i] <= 57){
             push(&helper, expression[i] - 48);
             operator = false;
         }
 
         else if(expression[i] == ' ' && operator == false){
-            int number = 0;
+            number = 0;
             while(helper.m_Size != 0){
                 number += pop(&helper) * multiplier;
                 multiplier *= 10;
@@ -121,6 +122,17 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, int* e
         }
     }
 
+    number = 0, multiplier = 1;
+    if(stack->m_Size == 0){
+        if(helper.m_Size != 0){
+            while(helper.m_Size != 0){
+                number += pop(&helper) * multiplier;
+                multiplier *= 10;
+            }
+            push(stack, number);
+        }
+
+    }
     int value = pop(stack);
     return value;
 
