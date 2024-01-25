@@ -14,14 +14,14 @@ int generate_quarter();
 
 int generate_final();
 
-void remove_whitespace(char* string, bool* error);
-
-void check_numbers(char* string, int* numbers, bool* error);
+int remove_whitespace(char* string);
 
 int find(int number, int* numbers, int size);
 
 void infix_to_postfix(struct Stack* stack, char* buffer);
 
 int precedence(char operation);
+
+int handle_finish();
 
 #endif
