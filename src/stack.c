@@ -47,6 +47,12 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, bool* 
     struct Stack helper;
     create_stack(&helper);
 
+    int used_numbers[SIZE-1];
+    for(i = 0; i<SIZE-1; ++i)
+        used_numbers[i] = numbers[i];
+    
+    int used_counter = SIZE-1;
+
     bool operator = false;
 
     for(i = 0; expression[i] != '\0'; ++i){
@@ -63,11 +69,21 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, bool* 
                 number += pop(&helper) * multiplier;
                 multiplier *= 10;
             }
-            if(!find(number, numbers)){
+
+            int index;
+
+            if((index = find(number, used_numbers, used_counter)) == -1){
                 *error = true;
                 return -1;
             }
+
+            for(int j = index; j<used_counter-1; ++j)
+                used_numbers[j] = used_numbers[j+1];
+            
+            --used_counter;
+
             push(stack, number);
+        
         }
 
         else{
