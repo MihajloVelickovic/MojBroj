@@ -11,9 +11,15 @@
 #include "stack.h"
 
 int expired = 0;
+int max_time = 50;
 
 void handler(int signum){
-    expired = 1;
+    //max_time -= 5;
+    //printf("%d seconds left\n", max_time);
+    //if(max_time <= 0)
+        expired = 1;
+    //else
+        //alarm(5);
 }
 
 int main(){
@@ -51,7 +57,7 @@ int main(){
 
         printf("\n\n");
 
-        alarm(TIME);
+        alarm(50);
 
         fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
@@ -71,7 +77,7 @@ int main(){
         
         if(expired){
             expired = 0;
-            fprintf(stderr, "50 Seconds expired!\n");
+            fprintf(stderr, "50 seconds expired!\n");
             if(handle_finish() < 0)
                 break;
             continue;
