@@ -45,7 +45,8 @@ int main(){
 
     int user_value = evaluate_postfix(&stack, buffer, numbers, &error);
     if(error){
-        fprintf(stderr, "One of the numbers used is not available!\n");
+        fprintf(stderr, "One of the numbers used is either not "
+                        "available, or already used!\n");
         return EXIT_FAILURE;
     }
 
@@ -53,7 +54,8 @@ int main(){
         printf("Correct!\n");
 
     else
-        printf("Incorrect! You missed by: %d\n", abs(numbers[FINAL] - user_value)); 
+        printf("Incorrect! You missed by: %d\n", 
+               abs(numbers[FINAL] - user_value)); 
 
     printf("Your number: %d\n", user_value);
 
