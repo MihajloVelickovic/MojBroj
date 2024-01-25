@@ -18,6 +18,8 @@ void push(struct Stack* stack, int element){
 int pop(struct Stack* stack){
    
     struct Node* top_node = stack->m_Top;
+    if(!top_node)   
+        return 0;
     int top_value = top_node->m_Value;
 
     stack->m_Top = top_node->m_Next;

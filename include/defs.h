@@ -10,7 +10,7 @@
 #define QUARTER 5
 #define FINAL 6
 
-#define TIME 50
+#define TIME 5
 
 #define SIZE 7
 
