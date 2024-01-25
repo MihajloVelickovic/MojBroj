@@ -2,18 +2,19 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-
-#ifdef _WIN32
-    #include <windows.h>
-    #define CLEAR "cls"
-#else
-    #include <unistd.h>
-    #define CLEAR "clear"
-#endif
+#include <signal.h>
+#include <sys/select.h>
+#include <unistd.h>
 
 #include "defs.h"
 #include "func.h"
 #include "stack.h"
+
+int expired = 0;
+
+void handler(int signum){
+    expired = 1;
+}
 
 int main(){
 
@@ -21,8 +22,10 @@ int main(){
 
     int numbers[SIZE], i, user_value;
     char buffer[MAX_EXPRESSION_SIZE];
-    bool error;
+    int error;
     struct Stack stack;
+
+    signal(SIGALRM, handler);
 
     while(true){
 
@@ -46,11 +49,38 @@ int main(){
 
         printf("\n\n");
 
-        fgets(buffer, MAX_EXPRESSION_SIZE, stdin);
-        buffer[strlen(buffer) - 1] = '\0';
+        alarm(TIME);
 
-        remove_whitespace(buffer, &error);
-        if(error){
+        while(!expired){
+            
+            fd_set read;
+            FD_ZERO(&read);
+            FD_SET(STDIN_FILENO, &read);
+
+            struct timeval tout = {
+                                    .tv_sec = 0,
+                                    .tv_usec = 10000
+                                  };
+
+            int rdy = select(STDOUT_FILENO, &read, NULL, NULL, &tout);
+
+            if(rdy > 0)
+                if(fgets(buffer, MAX_EXPRESSION_SIZE, stdin)){
+                    buffer[strlen(buffer) - 1] = '\0';
+                    alarm(0);
+                    break;
+                }
+            else if(rdy == 0)
+                continue;
+            
+        }
+        if(expired){
+            expired = 0;
+            fprintf(stderr, "50 Seconds expired!\n");
+            if(handle_finish() < 0)
+            continue;
+        }
+        if(remove_whitespace(buffer) < 0){
             fprintf(stderr, "Invalid character inside expression!\n");
             return EXIT_FAILURE;
         }
@@ -60,9 +90,15 @@ int main(){
         infix_to_postfix(&stack, buffer);
 
         user_value = evaluate_postfix(&stack, buffer, numbers, &error);
-        if(error){
-            fprintf(stderr, "One of the numbers used is either not "
-                            "available, or already used!\n");
+        if(error < 0){
+            switch(error){
+                case -1:
+                    printf("The number %d is either not available or used too many times\n", user_value);
+                    break;
+
+                case -2:
+                    printf("Invalid division\n");
+            }
             return EXIT_FAILURE;
         }
 
@@ -75,13 +111,8 @@ int main(){
 
         printf("Your number: %d\n", user_value);
 
-        printf("Press any button (q to quit)!\n");
-        char input = getchar();
-
-        if(input == 'q' || input == 'Q')
+        if(handle_finish() < 1)
             break;
-
-        system(CLEAR);
 
     }
 

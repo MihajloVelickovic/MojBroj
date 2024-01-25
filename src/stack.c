@@ -39,9 +39,9 @@ int top(struct Stack* stack){
     return stack->m_Top->m_Value;
 }
 
-int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, bool* error){
+int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, int* error){
     
-    *error = false;
+    *error = 0;
     empty(stack);
     int i;
     struct Stack helper;
@@ -73,8 +73,8 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, bool* 
             int index;
 
             if((index = find(number, used_numbers, used_counter)) == -1){
-                *error = true;
-                return -1;
+                *error = -1;
+                return number;
             }
 
             for(int j = index; j<used_counter-1; ++j)
@@ -109,6 +109,10 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, bool* 
                     push(stack, first * second);
                     break;
                 case '/':
+                    if(second % first != 0){
+                        *error = -2;
+                        return -1;
+                    }
                     push(stack, second / first);
                     break;
             }

@@ -2,7 +2,6 @@
 #define STACK_H
 
 #include "node.h"
-#include "defs.h"
 
 struct Stack{
     struct Node* m_Top;
@@ -17,7 +16,7 @@ int pop(struct Stack* stack);
 
 void empty(struct Stack* stack);
 
-int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, bool* error);
+int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, int* error);
 
 int top(struct Stack* stack);
 

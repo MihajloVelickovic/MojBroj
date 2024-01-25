@@ -10,9 +10,12 @@
 #define QUARTER 5
 #define FINAL 6
 
+#define TIME 50
 
 #define SIZE 7
 
 #define MAX_EXPRESSION_SIZE 32
+
+
 
 #endif

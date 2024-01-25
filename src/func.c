@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -20,16 +21,14 @@ int generate_final(){
     return rand() % 999 + 1;
 }
 
-void remove_whitespace(char* string, bool* error){    
+int remove_whitespace(char* string){    
 
-    *error = false;
     int size = 0;
     while(string[size] != '\0'){
         if((string[size] < 48 || string[size] > 57) && string[size] != '+' &&
             string[size] != '-' && string[size] != '*' && string[size] != '/'&&
             string[size] != '(' && string[size] != ')' && string[size] != ' '){
-                *error = true;
-                return;
+                return -1;
             }
         else
             ++size;
@@ -54,6 +53,8 @@ void remove_whitespace(char* string, bool* error){
         while(string[i] != ' ' && string[i] != '\0')
             ++i;        
     }
+
+    return 0;
 
 }
 
@@ -130,4 +131,17 @@ int precedence(char operation){
         default:
             return 0;
     }
+}
+
+int handle_finish(){
+
+    printf("Press any button (q to quit)!\n");
+    char input = getchar();
+
+    if(input == 'q' || input == 'Q')
+        return -1;
+
+    system("clear");
+    return 0;
+
 }
