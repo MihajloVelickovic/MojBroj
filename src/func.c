@@ -141,7 +141,12 @@ int handle_finish(){
     char buff[MAX_EXPRESSION_SIZE];
     fgets(buff, MAX_EXPRESSION_SIZE, stdin);
 
-    char input = getchar();
+    char input;
+    if(buff[strlen(buff)-1] == '\n' && buff[0] != '\n')
+        input = buff[strlen(buff)-2];
+    else
+        input = buff[strlen(buff)-1];
+
     if(input == 'q' || input == 'Q')
         return -1;
 
