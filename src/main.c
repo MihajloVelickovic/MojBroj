@@ -12,7 +12,7 @@ int main(){
     srand(time(NULL));
 
     int numbers[SIZE], i;
-    
+        
     for(i=0; i<TFT; ++i)
         numbers[i] = generate_digit();
 
@@ -25,7 +25,7 @@ int main(){
         printf("%d", numbers[i]);
     }
 
-    printf("\n\n"); 
+    printf("\n\n");
 
     char buffer[MAX_EXPRESSION_SIZE];
     fgets(buffer, MAX_EXPRESSION_SIZE, stdin);
@@ -34,24 +34,29 @@ int main(){
 
     bool error;
     remove_whitespace(buffer, &error); 
-
-    if(error == true){
-        fprintf(stderr, "Nevalidan karakter u stringu!\n");
+    if(error){
+        fprintf(stderr, "Invalid character inside expression!\n");
         return EXIT_FAILURE;
     }
-
+    
     struct Stack stack;
     create_stack(&stack);
 
     infix_to_postfix(&stack, buffer);
 
-    int user_value = evaluate_postfix(&stack, buffer);
+    int user_value = evaluate_postfix(&stack, buffer, numbers, &error);
+    if(error){
+        fprintf(stderr, "One of the numbers used is not available!\n");
+        return EXIT_FAILURE;
+    }
 
     if(user_value == numbers[FINAL])
         printf("Correct!\n");
 
     else
-        printf("Incorrect!\n"); 
+        printf("Incorrect! You missed by %d\n", abs(numbers[FINAL] - user_value)); 
+
+    printf("%d\n", user_value);
 
     return EXIT_SUCCESS;
 
