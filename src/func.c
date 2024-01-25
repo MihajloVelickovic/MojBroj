@@ -135,6 +135,9 @@ int precedence(char operation){
 
 int handle_finish(){
 
+    char clear;
+    while((clear = getchar()) != '\n' && clear != EOF);
+    
     printf("Press any button (q to quit)!\n");
     char input = getchar();
 
