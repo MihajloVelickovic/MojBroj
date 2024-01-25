@@ -20,11 +20,20 @@ int generate_final(){
     return rand() % 999 + 1;
 }
 
-void remove_whitespace(char* string){    
+void remove_whitespace(char* string, bool* error){    
 
+    *error = false;
     int size = 0;
-    while(string[size] != '\0')
-        ++size;
+    while(string[size] != '\0'){
+        if((string[size] < 48 || string[size] > 57) && string[size] != '+'
+            && string[size] != '-' && string[size] != '*' && string[size] != '/'
+            && string[size] != '(' && string[size] != ')' && string[size] != ' '){
+                *error = true;
+                return;
+            }
+        else
+            ++size;
+    }
     
     int i=0, j;
 
@@ -56,22 +65,25 @@ void infix_to_postfix(struct Stack* stack, char* string){
 
     while(string[i] != '\0'){
         
-        if(string[i] != '+' && string[i] != '-' && string[i] != '*' && string[i] != '/' && string[i] != '('){
+        if(string[i] != '+' && string[i] != '-' && string[i] != '*' && string[i] != '/' && string[i] != '(' && string[i] != ')'){
             strncat(postfix, &string[i], 1);
         }
 
         else if(string[i] == ')'){
             char op;
             while((op = (char)pop(stack)) != '('){
+                strcat(postfix, " ");
                 strncat(postfix, &op, 1);
             }
         }
 
         else{
-            strcat(postfix, " ");
+            if(postfix[0] != '\0')
+                strcat(postfix, " ");
             while(stack->m_Size != 0 && precedence((char)top(stack)) >= precedence(string[i])){
                 char sign = (char)pop(stack);
                 strncat(postfix, &sign, 1);
+                strcat(postfix, " ");
             }
             push(stack, string[i]);
         }
@@ -81,6 +93,7 @@ void infix_to_postfix(struct Stack* stack, char* string){
     }
 
     while(stack->m_Size != 0){
+        strcat(postfix, " ");
         char sign = (char)pop(stack);
         strncat(postfix, &sign, 1);
     }

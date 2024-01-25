@@ -31,21 +31,21 @@ int main(){
     fgets(buffer, MAX_EXPRESSION_SIZE, stdin);
     buffer[strlen(buffer) - 1] = '\0';
 
-    remove_whitespace(buffer); 
+
+    bool error;
+    remove_whitespace(buffer, &error); 
+
+    if(error == true){
+        fprintf(stderr, "Nevalidan karakter u stringu!\n");
+        return EXIT_FAILURE;
+    }
 
     struct Stack stack;
     create_stack(&stack);
 
     infix_to_postfix(&stack, buffer);
 
-    bool error;
-
-    int user_value = evaluate_postfix(&stack, buffer, &error);
-
-    if(error == true){
-        fprintf(stderr,"Postfix evaluation error\n");
-        return EXIT_FAILURE;
-    } 
+    int user_value = evaluate_postfix(&stack, buffer);
 
     if(user_value == numbers[FINAL])
         printf("Correct!\n");
@@ -54,4 +54,5 @@ int main(){
         printf("Incorrect!\n"); 
 
     return EXIT_SUCCESS;
+
 }

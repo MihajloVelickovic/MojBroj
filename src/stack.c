@@ -38,20 +38,24 @@ int top(struct Stack* stack){
     return stack->m_Top->m_Value;
 }
 
-int evaluate_postfix(struct Stack* stack, char* expression, bool* error){
+int evaluate_postfix(struct Stack* stack, char* expression){
     
     empty(stack);
     int i;
     struct Stack helper;
     create_stack(&helper);
 
+    bool operator = false;
+
     for(i = 0; expression[i] != '\0'; ++i){
 
         int multiplier = 1;
-        if(expression[i] >= 48 && expression[i] <= 57)
+        if(expression[i] >= 48 && expression[i] <= 57){
             push(&helper, expression[i] - 48);
+            operator = false;
+        }
 
-        else if(expression[i] == ' '){
+        else if(expression[i] == ' ' && operator == false){
             int number = 0;
             while(helper.m_Size != 0){
                 number += pop(&helper) * multiplier;
@@ -60,13 +64,12 @@ int evaluate_postfix(struct Stack* stack, char* expression, bool* error){
             push(stack, number);
         }
 
-        else if(expression[i] != '+' && expression[i] != '-' && expression[i] != '*' && expression[i] != '/')
-            *error = true;
-        
         else{
 
             int first = pop(stack);
             int second = pop(stack);
+
+            operator = true;
 
             switch (expression[i]){
                 case '+':
@@ -85,7 +88,6 @@ int evaluate_postfix(struct Stack* stack, char* expression, bool* error){
         }
     }
 
-    *error = false;
     int value = pop(stack);
     return value;
 
