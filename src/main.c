@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <signal.h>
 
 #ifdef __WIN32
     #include <windows.h>
