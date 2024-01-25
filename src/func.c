@@ -53,6 +53,13 @@ void remove_whitespace(char* string, bool* error){
 
 }
 
+bool find(int number, int* numbers){
+    for(int i=0; i<SIZE-1;++i)
+        if(number == numbers[i])
+            return true;
+    return false;
+}
+
 void infix_to_postfix(struct Stack* stack, char* string){
     
     empty(stack);
@@ -78,9 +85,9 @@ void infix_to_postfix(struct Stack* stack, char* string){
         }
 
         else{
-            if(postfix[0] != '\0')
+            if(postfix[0] != '\0' && postfix[strlen(postfix)-1] != ' ')
                 strcat(postfix, " ");
-            while(stack->m_Size != 0 && precedence((char)top(stack)) >= precedence(string[i])){
+            while(stack->m_Size != 0 && (char)top(stack) != '(' && precedence((char)top(stack)) >= precedence(string[i])){
                 char sign = (char)pop(stack);
                 strncat(postfix, &sign, 1);
                 strcat(postfix, " ");
@@ -113,6 +120,8 @@ int precedence(char operation){
             return 2;
         case '/':
             return 2;
+        case '(':
+            return 3;
         default:
             return 0;
     }

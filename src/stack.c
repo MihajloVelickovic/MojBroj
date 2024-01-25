@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "stack.h"
+#include "func.h"
 
 void create_stack(struct Stack* stack){
     stack->m_Top = NULL;
@@ -38,8 +39,9 @@ int top(struct Stack* stack){
     return stack->m_Top->m_Value;
 }
 
-int evaluate_postfix(struct Stack* stack, char* expression){
+int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, bool* error){
     
+    *error = false;
     empty(stack);
     int i;
     struct Stack helper;
@@ -61,10 +63,19 @@ int evaluate_postfix(struct Stack* stack, char* expression){
                 number += pop(&helper) * multiplier;
                 multiplier *= 10;
             }
+            if(!find(number, numbers)){
+                *error = true;
+                return -1;
+            }
             push(stack, number);
         }
 
         else{
+
+            if(operator){
+                operator = false;
+                continue;
+            }
 
             int first = pop(stack);
             int second = pop(stack);
