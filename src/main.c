@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <time.h>
-#include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <signal.h>
+#include <time.h>
 
 #include "defs.h"
 #include "func.h"
@@ -62,7 +62,7 @@ int main(){
                     alarm(0);
                     break;
             }
-            
+
             usleep(1000);
             
         }
