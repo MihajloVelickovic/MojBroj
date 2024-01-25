@@ -10,16 +10,10 @@
 #include "func.h"
 #include "stack.h"
 
-int expired = 0;
-int max_time = 50;
+bool expired = false;
 
 void handler(int signum){
-    //max_time -= 5;
-    //printf("%d seconds left\n", max_time);
-    //if(max_time <= 0)
-        expired = 1;
-    //else
-        //alarm(5);
+    expired = true;
 }
 
 int main(){
@@ -46,6 +40,8 @@ int main(){
 
         for(i=0; i<SIZE-3; ++i){
             getchar();
+            if(i==0)
+                system("clear");
             printf("%d", numbers[i]);
         }
 
@@ -57,16 +53,16 @@ int main(){
 
         printf("\n\n");
 
-        alarm(50);
+        alarm(TIME);
 
         fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
         while(!expired){
             
             if(fgets(buffer, MAX_EXPRESSION_SIZE, stdin) != NULL){
-                    buffer[strlen(buffer) - 1] = '\0';
-                    alarm(0);
-                    break;
+                buffer[strlen(buffer) - 1] = '\0';
+                alarm(0);
+                break;
             }
 
             usleep(1000);
@@ -77,7 +73,8 @@ int main(){
         
         if(expired){
             expired = 0;
-            fprintf(stderr, "50 seconds expired!\n");
+            fprintf(stderr, "\n50 seconds expired!\n");
+            ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
             continue;
@@ -96,7 +93,8 @@ int main(){
         if(error < 0){
             switch(error){
                 case -1:
-                    printf("The number %d is either not available or used too many times\n", user_value);
+                    printf("The number %d is either not available"
+                           "or used too many times\n", user_value);
                     break;
 
                 case -2:
@@ -113,7 +111,7 @@ int main(){
                 abs(numbers[FINAL] - user_value)); 
 
         printf("Your number: %d\n", user_value);
-
+        ungetc('\n', stdin);
         if(handle_finish() < 0)
             break;
 

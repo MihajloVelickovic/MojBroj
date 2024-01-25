@@ -135,12 +135,13 @@ int precedence(char operation){
 
 int handle_finish(){
 
-    char clear;
-    while((clear = getchar()) != '\n' && clear != EOF);
-    
-    printf("Press any button (q to quit)!\n");
-    char input = getchar();
 
+    printf("Press any button (q to quit)!\n");
+    char flush = getchar();
+    char buff[MAX_EXPRESSION_SIZE];
+    fgets(buff, MAX_EXPRESSION_SIZE, stdin);
+
+    char input = getchar();
     if(input == 'q' || input == 'Q')
         return -1;
 
