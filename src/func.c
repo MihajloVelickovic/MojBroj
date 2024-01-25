@@ -38,14 +38,19 @@ void remove_whitespace(char* string, bool* error){
     int i=0, j;
 
     while(string[i] != '\0'){
+     
         j = i;
         while(string[i] == ' ' && string[i] !='\0')
             ++i;
 
-        for(int k=j, l=i; l<=size; ++l,++k)
-            string[k] = string[l];       
+        
+        if(i != j)
+            for(int k=j, l=i; l<=size; ++l,++k)
+                string[k] = string[l];       
 
         size -= (i-j); 
+
+        i = j;
 
         while(string[i] != ' ' && string[i] != '\0')
             ++i;        
