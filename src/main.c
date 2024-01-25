@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <signal.h>
-#include <sys/select.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 #include "defs.h"
 #include "func.h"
@@ -26,6 +26,8 @@ int main(){
     struct Stack stack;
 
     signal(SIGALRM, handler);
+
+    int flags = fcntl(STDIN_FILENO, F_GETFL, 0);
 
     while(true){
 
@@ -51,35 +53,30 @@ int main(){
 
         alarm(TIME);
 
+        fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
+
         while(!expired){
             
-            fd_set read;
-            FD_ZERO(&read);
-            FD_SET(STDIN_FILENO, &read);
-
-            struct timeval tout = {
-                                    .tv_sec = 0,
-                                    .tv_usec = 10000
-                                  };
-
-            int rdy = select(STDOUT_FILENO, &read, NULL, NULL, &tout);
-
-            if(rdy > 0)
-                if(fgets(buffer, MAX_EXPRESSION_SIZE, stdin)){
+            if(fgets(buffer, MAX_EXPRESSION_SIZE, stdin) != NULL){
                     buffer[strlen(buffer) - 1] = '\0';
                     alarm(0);
                     break;
-                }
-            else if(rdy == 0)
-                continue;
+            }
+            
+            usleep(1000);
             
         }
+
+        fcntl(STDIN_FILENO, F_SETFL, flags & ~O_NONBLOCK);
+        
         if(expired){
             expired = 0;
             fprintf(stderr, "50 Seconds expired!\n");
             if(handle_finish() < 0)
+                break;
             continue;
         }
+
         if(remove_whitespace(buffer) < 0){
             fprintf(stderr, "Invalid character inside expression!\n");
             return EXIT_FAILURE;
@@ -111,7 +108,7 @@ int main(){
 
         printf("Your number: %d\n", user_value);
 
-        if(handle_finish() < 1)
+        if(handle_finish() < 0)
             break;
 
     }
