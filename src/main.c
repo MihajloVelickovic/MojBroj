@@ -31,9 +31,8 @@ int main(){
     fgets(buffer, MAX_EXPRESSION_SIZE, stdin);
     buffer[strlen(buffer) - 1] = '\0';
 
-
     bool error;
-    remove_whitespace(buffer, &error); 
+    remove_whitespace(buffer, &error);
     if(error){
         fprintf(stderr, "Invalid character inside expression!\n");
         return EXIT_FAILURE;
@@ -54,9 +53,9 @@ int main(){
         printf("Correct!\n");
 
     else
-        printf("Incorrect! You missed by %d\n", abs(numbers[FINAL] - user_value)); 
+        printf("Incorrect! You missed by: %d\n", abs(numbers[FINAL] - user_value)); 
 
-    printf("%d\n", user_value);
+    printf("Your number: %d\n", user_value);
 
     return EXIT_SUCCESS;
 
