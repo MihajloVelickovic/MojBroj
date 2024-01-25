@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "stack.h"
+#include "defs.h"
 
 int generate_digit();
 
@@ -13,7 +14,7 @@ int generate_quarter();
 
 int generate_final();
 
-void remove_whitespace(char* string);
+void remove_whitespace(char* string, bool* error);
 
 void infix_to_postfix(struct Stack* stack, char* buffer);
 

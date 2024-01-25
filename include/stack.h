@@ -17,7 +17,7 @@ int pop(struct Stack* stack);
 
 void empty(struct Stack* stack);
 
-int evaluate_postfix(struct Stack* stack, char* expression, bool* error);
+int evaluate_postfix(struct Stack* stack, char* expression);
 
 int top(struct Stack* stack);
 
