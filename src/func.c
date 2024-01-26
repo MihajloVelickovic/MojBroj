@@ -66,7 +66,13 @@ int find(int number, int* numbers, int size){
 }
 
 void infix_to_postfix(struct Stack* stack, char* string){
-    
+
+    if(string[0] == '\0'){
+        string[0] = '0';
+        string[1] = '\0';
+        return;
+    }
+
     empty(stack);
 
     char postfix[MAX_EXPRESSION_SIZE];

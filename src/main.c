@@ -20,7 +20,7 @@ int main(){
 
     srand(time(NULL));
 
-    int numbers[SIZE], i, user_value;
+    int numbers[SIZE], i, user_value, total_score = 0;
     char buffer[MAX_EXPRESSION_SIZE];
     int error;
     struct Stack stack;
@@ -74,6 +74,7 @@ int main(){
         if(expired){
             expired = 0;
             fprintf(stderr, "\n50 seconds expired!\n");
+            printf("Total score: %d\n", total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
@@ -81,8 +82,12 @@ int main(){
         }
 
         if(remove_whitespace(buffer) < 0){
-            fprintf(stderr, "Invalid character inside expression!\n");
-            return EXIT_FAILURE;
+            fprintf(stderr, "\nInvalid character inside expression!\n"); 
+            printf("Total score: %d\n", total_score);
+            ungetc('\n', stdin);
+            if(handle_finish() < 0)
+                break;
+            continue;
         }
     
         create_stack(&stack);
@@ -93,24 +98,37 @@ int main(){
         if(error < 0){
             switch(error){
                 case -1:
-                    printf("The number %d is either not available"
+                    printf("\nThe number %d is either not available"
                            "or used too many times\n", user_value);
                     break;
 
                 case -2:
-                    printf("Invalid division\n");
+                    printf("\nInvalid division\n");
             }
-            return EXIT_FAILURE;
+            printf("Total score: %d\n", total_score);
+            ungetc('\n', stdin);
+            if(handle_finish() < 0)
+                break;
+            continue;
         }
 
-        if(user_value == numbers[FINAL])
-            printf("Correct!\n");
+        if(user_value == numbers[FINAL]){
+            printf("\nCorrect!\n");
+            total_score += 10;
+        }
 
-        else
-            printf("Incorrect! You missed by: %d\n", 
-                abs(numbers[FINAL] - user_value)); 
-
+        else{
+            int difference = abs(numbers[FINAL] - user_value);
+            printf("\nIncorrect! You missed by: %d\n", difference); 
+            if(difference <= 5)
+                total_score += 5;
+            else if(difference <= 10)
+                total_score += 2;
+        }
         printf("Your number: %d\n", user_value);
+        
+        printf("Total score: %d\n", total_score);
+        
         ungetc('\n', stdin);
         if(handle_finish() < 0)
             break;
