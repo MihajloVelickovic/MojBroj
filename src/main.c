@@ -135,6 +135,7 @@ int main(){
 
     }
 
+    printf("Total score: %d\n", total_score);
     return EXIT_SUCCESS;
 
 }
