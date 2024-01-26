@@ -20,10 +20,15 @@ int main(){
 
     srand(time(NULL));
 
+    system("clear");
+
     int numbers[SIZE], i, user_value, total_score = 0;
     char buffer[MAX_EXPRESSION_SIZE];
     int error;
     struct Stack stack;
+
+    int divisor;
+    int final_helper, digit;
 
     signal(SIGALRM, handler);
 
@@ -38,14 +43,29 @@ int main(){
         numbers[QUARTER] = generate_quarter();    
         numbers[FINAL] = generate_final();
 
+        divisor = 100;
+        final_helper = numbers[FINAL];
+
+        for(i=0;i<3;++i){
+            digit = final_helper/divisor;
+            getchar();
+            if(i == 0)
+                system("clear");
+            printf("%d", digit);
+            final_helper %= divisor;
+            divisor/=10;
+        }
+
+        getchar();
+        system("clear");
+        printf("%d\n", numbers[FINAL]);
+
         for(i=0; i<SIZE-3; ++i){
             getchar();
-            if(i==0)
-                system("clear");
             printf("%d", numbers[i]);
         }
 
-        for(i=SIZE-3; i<SIZE; ++i){
+        for(i=SIZE-3; i<SIZE-1; ++i){
             printf("\n");
             getchar();
             printf("%d", numbers[i]);
