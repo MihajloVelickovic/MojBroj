@@ -93,8 +93,8 @@ int main(){
         
         if(expired){
             expired = 0;
-            fprintf(stderr, "\n50 seconds expired!\n");
-            printf("Total score: %d\n", total_score);
+            fprintf(stderr, "\n%d seconds expired!\n");
+            printf("Total score: %d\n", TIME, total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
@@ -119,7 +119,7 @@ int main(){
             switch(error){
                 case -1:
                     printf("\nThe number %d is either not available"
-                           "or used too many times\n", user_value);
+                           " or used too many times\n", user_value);
                     break;
 
                 case -2:
