@@ -58,17 +58,20 @@ int main(){
 
         getchar();
         system("clear");
-        printf("%d\n", numbers[FINAL]);
+        printf(ANSI_GREEN"%d\n", numbers[FINAL]);
 
         for(i=0; i<SIZE-3; ++i){
             getchar();
-            printf("%d", numbers[i]);
+            printf(ANSI_YELLOW"%d", numbers[i]);
         }
 
         for(i=SIZE-3; i<SIZE-1; ++i){
             printf("\n");
             getchar();
-            printf("%d", numbers[i]);
+            if(i == SIZE-2)
+                printf(ANSI_BLUE"%d", numbers[i]);
+            else
+                printf(ANSI_PURPLE"%d", numbers[i]);
         }
 
         printf("\n\n");
