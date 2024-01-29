@@ -136,7 +136,7 @@ int main(){
         }
 
         if(user_value == numbers[FINAL]){
-            printf(ANSI_GREEN"\nCorrect!\n"ANSI_WHITE);
+            printf(ANSI_GREEN_BOLD"\nCorrect!\n"ANSI_WHITE);
             total_score += 10;
         }
 
