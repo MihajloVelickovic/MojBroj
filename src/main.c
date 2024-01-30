@@ -30,6 +30,11 @@ int main(){
     int divisor;
     int final_helper, digit;
 
+    printf("Once all of the numbers are present, you have ");
+    printf(ANSI_GREEN_BOLD"%d"ANSI_WHITE" seconds!\n", TIME);
+    getchar();
+    system("clear");
+    
     signal(SIGALRM, handler);
 
     int flags = fcntl(STDIN_FILENO, F_GETFL, 0);
@@ -96,8 +101,8 @@ int main(){
         
         if(expired){
             expired = 0;
-            fprintf(stderr, "\n%d seconds expired!\n");
-            printf("Total score: %d\n", TIME, total_score);
+            fprintf(stderr, "\n%d seconds expired!\n", TIME);
+            printf("Total score: %d\n", total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
@@ -106,7 +111,7 @@ int main(){
 
         if(remove_whitespace(buffer) < 0){
             fprintf(stderr, "\nInvalid character inside expression!\n"); 
-            printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE, total_score);
+            printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE,total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
@@ -121,18 +126,19 @@ int main(){
         if(error < 0){
             switch(error){
                 case -1:
-                    printf("\nThe number"ANSI_RED_BOLD" %d "ANSI_WHITE"is either not available"
-                           " or used too many times\n", user_value);
+                    printf("\nThe number"ANSI_RED_BOLD" %d "ANSI_WHITE,
+                                                            user_value);
+                    printf("is either not available or used too many times\n");
                     break;
-
                 case -2:
                     printf("\nInvalid division\n");
                     break;
                 case -3:
-                    printf("\nDivision by "ANSI_RED_BOLD"0"ANSI_WHITE" is prohibited!\n");
+                    printf("\nDivision by "ANSI_RED_BOLD"0"ANSI_WHITE);
+                    printf(" is prohibited!\n");
                     break;
             }
-            printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE, total_score);
+            printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE,total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
@@ -146,14 +152,18 @@ int main(){
 
         else{
             int difference = abs(numbers[FINAL] - user_value);
+
             printf(ANSI_RED_BOLD"\nIncorrect!");
-            printf(ANSI_WHITE" You missed by: "ANSI_RED_BOLD"%d\n"ANSI_WHITE, difference); 
+            printf(ANSI_WHITE" You missed by: "ANSI_RED_BOLD"%d\n",difference);
+            printf(ANSI_WHITE); 
             if(difference <= 5)
                 total_score += 5;
             else if(difference <= 10)
                 total_score += 2;
         }
-        printf("Your number: %s%d\n"ANSI_WHITE, user_value == numbers[FINAL] ? ANSI_GREEN_BOLD : ANSI_RED_BOLD, user_value);
+        printf("Your number: %s%d\n"ANSI_WHITE, user_value == numbers[FINAL] 
+                                                ? ANSI_GREEN_BOLD:ANSI_RED_BOLD
+                                                , user_value);
         
         printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE, total_score);
         
