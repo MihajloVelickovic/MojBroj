@@ -102,7 +102,7 @@ int main(){
         if(expired){
             expired = 0;
             fprintf(stderr, "\n%d seconds expired!\n", TIME);
-            printf("Total score: %d\n", total_score);
+            printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE,total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
