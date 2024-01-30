@@ -109,8 +109,10 @@ int main(){
             continue;
         }
 
-        if(remove_whitespace(buffer) < 0){
-            fprintf(stderr, "\nInvalid character inside expression!\n"); 
+        int inv_char;
+        if((inv_char = remove_whitespace(buffer)) > 0){
+            fprintf(stderr, "\nInvalid character "ANSI_RED_BOLD"%c", inv_char);
+            fprintf(stderr, ANSI_WHITE" inside expression!\n", inv_char); 
             printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE,total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
