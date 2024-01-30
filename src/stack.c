@@ -18,15 +18,10 @@ void push(struct Stack* stack, int element){
 int pop(struct Stack* stack){
    
     struct Node* top_node = stack->m_Top;
-
     int top_value = top_node->m_Value;
-
     stack->m_Top = top_node->m_Next;
-
     free(top_node);
-
     --stack->m_Size;
-
     return top_value;
 
 }
@@ -40,6 +35,13 @@ int top(struct Stack* stack){
     return stack->m_Top->m_Value;
 }
 
+/**
+ * @param stack Helper stack
+ * @param expression Postfix expression
+ * @param numbers An array of available numbers for the expression
+ * @param error 0 - Success, -1 Unavailable num, -2 Indivisible nums, -3 /0
+ * @return Value of postfix expression
+*/
 int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, int* error){
     
     *error = 0;
@@ -112,9 +114,10 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, int* e
                     push(stack, first * second);
                     break;
                 case '/':
-                    if(first == 0)
+                    if(first == 0){
                         *error = -3;
                         return -1;
+                    }
                     if(second % first != 0){
                         *error = -2;
                         return -1;

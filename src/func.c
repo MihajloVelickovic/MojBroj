@@ -21,6 +21,10 @@ int generate_final(){
     return rand() % 999 + 1;
 }
 
+/** 
+ * @param string String from which to remove whitespace 
+ * @return 0 - Sucess, > 0 - ASCII Code of invalid character 
+ */
 int remove_whitespace(char* string){    
 
     int size = 0;
@@ -28,7 +32,7 @@ int remove_whitespace(char* string){
         if((string[size] < 48 || string[size] > 57) && string[size] != '+' &&
             string[size] != '-' && string[size] != '*' && string[size] != '/'&&
             string[size] != '(' && string[size] != ')' && string[size] != ' '){
-                return -1;
+                return string[size];
             }
         else
             ++size;
@@ -65,6 +69,11 @@ int find(int number, int* numbers, int size){
     return -1;
 }
 
+/**
+ * @param stack Helper stack
+ * @param string Infix expression
+ * @return void, @param string will be postfix
+*/
 void infix_to_postfix(struct Stack* stack, char* string){
 
     if(string[0] == '\0'){
