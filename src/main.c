@@ -121,12 +121,16 @@ int main(){
         if(error < 0){
             switch(error){
                 case -1:
-                    printf("\nThe number"ANSI_RED" %d "ANSI_WHITE"is either not available"
+                    printf("\nThe number"ANSI_RED_BOLD" %d "ANSI_WHITE"is either not available"
                            " or used too many times\n", user_value);
                     break;
 
                 case -2:
                     printf("\nInvalid division\n");
+                    break;
+                case -3:
+                    printf("\nDivision by "ANSI_RED_BOLD"0"ANSI_WHITE" is prohibited!\n");
+                    break;
             }
             printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE, total_score);
             ungetc('\n', stdin);
@@ -142,14 +146,14 @@ int main(){
 
         else{
             int difference = abs(numbers[FINAL] - user_value);
-            printf(ANSI_RED"\nIncorrect!");
-            printf(ANSI_WHITE" You missed by: "ANSI_RED"%d\n"ANSI_WHITE, difference); 
+            printf(ANSI_RED_BOLD"\nIncorrect!");
+            printf(ANSI_WHITE" You missed by: "ANSI_RED_BOLD"%d\n"ANSI_WHITE, difference); 
             if(difference <= 5)
                 total_score += 5;
             else if(difference <= 10)
                 total_score += 2;
         }
-        printf("Your number: %d\n", user_value);
+        printf("Your number: %s%d\n"ANSI_WHITE, user_value == numbers[FINAL] ? ANSI_GREEN_BOLD : ANSI_RED_BOLD, user_value);
         
         printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE, total_score);
         

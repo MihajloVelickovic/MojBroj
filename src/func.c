@@ -141,7 +141,7 @@ int precedence(char operation){
 
 int handle_finish(){
 
-    printf("Press any button (q to quit)!\n");
+    printf("Press any button ("ANSI_RED_BOLD"q"ANSI_WHITE" to quit)!\n");
     char flush = getchar();
     char buff[MAX_EXPRESSION_SIZE];
     fgets(buff, MAX_EXPRESSION_SIZE, stdin);
