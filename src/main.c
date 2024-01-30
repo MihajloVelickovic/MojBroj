@@ -74,7 +74,7 @@ int main(){
                 printf(ANSI_PURPLE"%d", numbers[i]);
         }
 
-        printf(ANSI_WHITE"\n\n");
+        printf(ANSI_WHITE"\n-----------------------------------\n");
 
         alarm(TIME);
 
@@ -159,7 +159,7 @@ int main(){
 
     }
 
-    printf("Total score: %d\n", total_score);
+    printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE, total_score);
     return EXIT_SUCCESS;
 
 }
