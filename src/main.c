@@ -138,7 +138,7 @@ int main(){
                     fprintf(stderr, "\nInvalid division\n");
                     break;
                 case -3:
-                    printf(stderr, "\nDivision by "ANSI_RED_BOLD"0"ANSI_WHITE
+                    fprintf(stderr, "\nDivision by "ANSI_RED_BOLD"0"ANSI_WHITE
                            " is prohibited!\n");
                     break;
             }

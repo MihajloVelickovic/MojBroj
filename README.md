@@ -8,11 +8,9 @@ Demonstration
 
 ## Rules of the game
 - Press any key 3 times to get the 3 digit number you'll be looking for
-<<<<<<< HEAD
 - Press any key 4 times to get the available single digit ( != 0) numbers 
 =======
 - Press any key 4 times to get the 4 available single digit ( != 0 ) numbers 
->>>>>>> c22ec73 (Azuriran readme, dodate build instrukcije)
 - Press any key once to get the available number ∈ {10, 15, 20}
 - Press any key once to ge the available number ∈ {25, 50, 75, 100}
 - After this, **90 seconds** start ticking
