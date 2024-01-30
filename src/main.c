@@ -30,8 +30,8 @@ int main(){
     int divisor;
     int final_helper, digit;
 
-    printf("Once all of the numbers are present, you have ");
-    printf(ANSI_GREEN_BOLD"%d"ANSI_WHITE" seconds!\n", TIME);
+    printf("Once all of the numbers are present, you have "
+           ANSI_GREEN_BOLD"%d"ANSI_WHITE" seconds!\n", TIME);
     getchar();
     system("clear");
     
@@ -101,8 +101,10 @@ int main(){
         
         if(expired){
             expired = 0;
-            fprintf(stderr, "\n%d seconds expired!\n", TIME);
-            printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE,total_score);
+            fprintf(stderr, ANSI_RED_BOLD"\n%d seconds expired!\n"ANSI_WHITE, 
+                                                                        TIME);
+            printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE, 
+                                                       total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
                 break;
@@ -111,8 +113,8 @@ int main(){
 
         int inv_char;
         if((inv_char = remove_whitespace(buffer)) > 0){
-            fprintf(stderr, "\nInvalid character "ANSI_RED_BOLD"%c", inv_char);
-            fprintf(stderr, ANSI_WHITE" inside expression!\n", inv_char); 
+            fprintf(stderr, "\nInvalid character "ANSI_RED_BOLD"%c"
+                    ANSI_WHITE" inside expression!\n", inv_char); 
             printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE,total_score);
             ungetc('\n', stdin);
             if(handle_finish() < 0)
@@ -128,16 +130,16 @@ int main(){
         if(error < 0){
             switch(error){
                 case -1:
-                    printf("\nThe number"ANSI_RED_BOLD" %d "ANSI_WHITE,
-                                                            user_value);
-                    printf("is either not available or used too many times\n");
+                    fprintf(stderr, "\nThe number"ANSI_RED_BOLD" %d "ANSI_WHITE
+                           "is either not available or used too many times\n",
+                           user_value);
                     break;
                 case -2:
-                    printf("\nInvalid division\n");
+                    fprintf(stderr, "\nInvalid division\n");
                     break;
                 case -3:
-                    printf("\nDivision by "ANSI_RED_BOLD"0"ANSI_WHITE);
-                    printf(" is prohibited!\n");
+                    printf(stderr, "\nDivision by "ANSI_RED_BOLD"0"ANSI_WHITE
+                           " is prohibited!\n");
                     break;
             }
             printf("Total score: "ANSI_GREEN_BOLD"%d\n"ANSI_WHITE,total_score);
