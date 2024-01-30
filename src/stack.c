@@ -112,6 +112,9 @@ int evaluate_postfix(struct Stack* stack, char* expression, int* numbers, int* e
                     push(stack, first * second);
                     break;
                 case '/':
+                    if(first == 0)
+                        *error = -3;
+                        return -1;
                     if(second % first != 0){
                         *error = -2;
                         return -1;
