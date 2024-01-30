@@ -32,19 +32,19 @@ Requirements:
 Steps:
 1. Clone the repository 
 ```bash
-    git clone github.com/MihajloVelickovic/MojBroj.git
-    cd MojBroj
+git clone github.com/MihajloVelickovic/MojBroj.git
+cd MojBroj
 ```
 2. Generate buildfiles 
 ```bash
-    cmake . -B ./build [-DCMAKE_BUILD_TYPE=Release]
+cmake . -B ./build [-DCMAKE_BUILD_TYPE=Release]
 ```
 3. Build
 ```bash
-    cmake --build build
+cmake --build build
 ```
 4. Run
 ```bash
-    cd build
-    ./mojbroj
+cd build
+./mojbroj
 ```
