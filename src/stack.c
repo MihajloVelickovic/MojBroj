@@ -2,6 +2,7 @@
 
 #include "stack.h"
 #include "func.h"
+#include "defs.h"
 
 void create_stack(struct Stack* stack){
     stack->m_Top = NULL;

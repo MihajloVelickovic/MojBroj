@@ -100,7 +100,7 @@ int main(){
             else
                 strcpy(color, ANSI_RED);
 
-            printf("Time left: %s%d"ANSI_WHITE"s", color, remaining_time);
+            printf("Time left: %s%d"ANSI_WHITE, color, remaining_time);
             
             printf(ANSI_RESTOREPOS);
             

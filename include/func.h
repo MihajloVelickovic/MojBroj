@@ -1,10 +1,7 @@
 #ifndef FUNC_H
 #define FUNC_H
 
-#include <stdlib.h>
-
 #include "stack.h"
-#include "defs.h"
 
 int generate_digit();
 
