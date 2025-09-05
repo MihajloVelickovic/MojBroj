@@ -24,5 +24,10 @@
 #define ANSI_BLUE "\e[0;34m"
 #define ANSI_PURPLE "\e[0;35m"
 #define ANSI_WHITE "\e[0;37m"
+#define ANSI_TWOLINES_BACK "\e[2F"
+#define ANSI_CLEAR "\e[2K"
+#define ANSI_SAVEPOS "\e7"
+#define ANSI_RESTOREPOS "\e8"
+#define ANSI_CODELEN 8
 
 #endif

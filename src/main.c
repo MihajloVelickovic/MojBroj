@@ -22,8 +22,8 @@ int main(){
 
     system("clear");
 
-    int numbers[SIZE], i, user_value, total_score = 0;
-    char buffer[MAX_EXPRESSION_SIZE];
+    int numbers[SIZE], i, remaining_time, user_value, total_score = 0;
+    char buffer[MAX_EXPRESSION_SIZE], color[ANSI_CODELEN];
     int error;
     struct Stack stack;
 
@@ -79,27 +79,55 @@ int main(){
                 printf(ANSI_PURPLE"%d", numbers[i]);
         }
 
-        printf(ANSI_WHITE"\n-----------------------------------\n");
+        printf(ANSI_WHITE"\n\n-----------------------------------\n");
 
         alarm(TIME);
 
         fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
-
+        
         while(!expired){
             
+            remaining_time = alarm(0);
+
+            /* Handle printing remaining time left */
+            printf(ANSI_SAVEPOS);
+            printf(ANSI_TWOLINES_BACK);
+            
+            if(remaining_time > TIME/2)
+                strcpy(color, ANSI_GREEN);
+            else if(remaining_time <= TIME/2 && remaining_time > TIME/6) 
+                strcpy(color, ANSI_YELLOW);
+            else
+                strcpy(color, ANSI_RED);
+
+            printf("Time left: %s%d"ANSI_WHITE"s", color, remaining_time);
+            
+            printf(ANSI_RESTOREPOS);
+            
+            alarm(remaining_time);
+
             if(fgets(buffer, MAX_EXPRESSION_SIZE, stdin) != NULL){
                 buffer[strlen(buffer) - 1] = '\0';
                 alarm(0);
                 break;
             }
-
-            usleep(1000);
             
+            usleep(1000000);
+
         }
+
+        /* Cleans 'Time remaining' printed on next line
+         * after pressing return */
+        printf(ANSI_SAVEPOS);
+        printf(ANSI_TWOLINES_BACK ANSI_TWOLINES_BACK);
+        printf(ANSI_WHITE"\n\n-----------------------------------\n");
+        printf(ANSI_RESTOREPOS);
+        printf("\r"ANSI_CLEAR);
 
         fcntl(STDIN_FILENO, F_SETFL, flags & ~O_NONBLOCK);
         
         if(expired){
+            fflush(stdin);
             expired = 0;
             fprintf(stderr, ANSI_RED_BOLD"\n%d seconds expired!\n"ANSI_WHITE, 
                                                                         TIME);
